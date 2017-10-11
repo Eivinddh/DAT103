@@ -13,13 +13,14 @@ section .bss
   a resb 1
   i resb 1
 
+section .text
+
 global _start
 _start:
+  mov [a],byte 0
+  mov [i],byte 0
   mov edx,a
   mov ecx,i
-  mov [edx],byte 0
-  mov [ecx],byte 0
-  
   call MyLoop
   
 MyLoop:
@@ -36,14 +37,16 @@ MyLoop:
   
 Add:
   push edx
-  inc edx
+  INC edx
   
 Sub:
   push edx
-  sub edx
+  DEC edx
   
 Slutt:
-  sub edx,'0'
+  mov ecx, a
+  call skrivsiffer
+
   mov ebx,STDOUT
   mov eax,SYS_EXIT
   mov ebx,0
