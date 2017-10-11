@@ -1,0 +1,85 @@
+Skallprogram må gjøres kjørbart:
+chmod u+x etprog.sh
+
+Utføres fra kommandopromten:
+./test.sh
+
+Bør angi hvilket kommandoskall som skal benyttes i første linje:
+#!/bin/bash
+Hvis det ikke spesifiseres brukes kommandovinduet sitt skall
+
+Vil kunne bruke vanlige bashscripe som kommandoer. Her legger vi til 
+export PATH=$PATH:.
+
+Hvis vi vil gjøre den permanent:
+HOME/.bash_profile
+
+endre bruker til en mappe (?)
+chown -R cwo:cwo dat103_2
+
+Antall argumenter: $#
+Argument 1: $1
+Argument 2: $2
+Alle argumenter er: $@
+
+[ $# -gt 1 ] && echo "tekst som vil vises hvis det er sant"
+
+Hvis du vil kjøre flerne kommandoer:
+ls ; cd ./ ; ...
+eller hvis du vil at alle skal kun kjøre hvis ingen feiler:
+ls && cd ./
+
+Hvis vi trenger mer enn 9 argumenter, kan vi bruke løkker og/eller kommando shift som skifter $2 til $1, $3 til $2 osv...
+
+if []
+then
+	echo ""
+elif []
+then
+	echo
+else
+	echo 
+fi
+
+
+declare -i tall=0
+while [ $tall -lt 10]
+do
+	echo "Tallet er $((tall++))."
+done
+
+
+declare -i sum=0
+declare -i tall # exec 0<talliste.txt
+
+while read tall
+do
+	((sum+=tall ))
+done
+
+echo "Summen er $sum."
+
+
+for farge in rød grønn blå
+do
+	echo $farge
+done
+
+
+for fil in *
+do
+	echo $fil
+done
+
+#for-løkke uten argument gjennomløper argumentene
+# samme som 
+
+
+for ((i=0;i<20;++i))
+
+
+Farge på tekst:
+echo -e "\e [38,5;200mtest"
+
+
+ping localhost
