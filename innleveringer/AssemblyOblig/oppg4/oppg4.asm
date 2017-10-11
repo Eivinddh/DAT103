@@ -43,6 +43,25 @@ Sub:
   push edx
   DEC edx
   
+skrivsiffer:
+; Skriver ut sifferet lagret i ecx. Ingen sjekk på verdiområde.
+push eax
+push ebx
+push ecx
+push edx
+add ecx,'0' ; converter tall til ascii.
+mov [siffer],ecx
+mov ecx,siffer
+mov edx,1
+mov ebx,STDOUT
+mov eax,SYS_WRITE
+int 80h
+push edx
+push ecx
+push ebx
+push eax
+ret
+
 Slutt:
   mov ecx, a
   call skrivsiffer
