@@ -12,6 +12,7 @@
 section .bss
   a resb 1
   i resb 1
+  siffer resb 4
 
 section .text
 
@@ -51,8 +52,15 @@ RestLoop:
   jmp MyLoop 
 
 Slutt:
-  sub edx,'0'
+  push edx
+  push ebx
+  push eax
+  add edx,'0'
+  mov [siffer],ecx
+  mov ecx,siffer
+  mov edx,1
   mov ebx,STDOUT
+  mov eax,SYS_WRITE
   int 80h
   mov eax,SYS_EXIT
   mov ebx,0
