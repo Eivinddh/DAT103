@@ -19,54 +19,41 @@ global _start
 _start:
   mov [a],byte 0
   mov [i],byte 0
-  mov edx,a
-  mov ecx,i
-  call MyLoop
+  mov edx,[a]
+  mov ecx,[i]
+  jmp MyLoop
   
 MyLoop:
   push edx
   push ecx
-  
   cmp ecx,10
   ja Sub ;conditioned/unconditioned?
   jl Add
-  inc ecx
-  cmp ecx,20
-  je Slutt
-  loop MyLoop
   
 Add:
   push edx
   INC edx
+  pop edx
+  jmp RestLoop
   
 Sub:
   push edx
   DEC edx
-  
-skrivsiffer:
-; Skriver ut sifferet lagret i ecx. Ingen sjekk på verdiområde.
-push eax
-push ebx
-push ecx
-push edx
-add ecx,'0' ; converter tall til ascii.
-mov [siffer],ecx
-mov ecx,siffer
-mov edx,1
-mov ebx,STDOUT
-mov eax,SYS_WRITE
-int 80h
-push edx
-push ecx
-push ebx
-push eax
-ret
+  pop edx
+  jmp RestLoop
+ 
+RestLoop:
+  push edx
+  push ecx
+  inc ecx
+  cmp ecx,20
+  je Slutt
+  jmp MyLoop 
 
 Slutt:
-  mov ecx, a
-  call skrivsiffer
-
+  sub edx,'0'
   mov ebx,STDOUT
+  int 80h
   mov eax,SYS_EXIT
   mov ebx,0
   int 80h
