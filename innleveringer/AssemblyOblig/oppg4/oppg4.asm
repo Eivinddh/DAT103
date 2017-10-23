@@ -9,6 +9,12 @@
   STDERR equ 2
 
 ; Datasegment
+section .data
+  crlf db cr,lf
+  crlflen equ $ - crlf
+
+
+; Datasegment
 section .bss
   a resb 1
   i resb 1
