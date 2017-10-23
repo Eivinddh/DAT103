@@ -65,3 +65,20 @@ Slutt:
   mov eax,SYS_EXIT
   mov ebx,0
   int 80h
+  
+nylinje:
+  push eax
+  push ebx
+  push ecx
+  push edx
+  mov edx,crlflen
+  mov ecx,crlf
+  mov ebx,STDOUT
+  mov eax,SYS_WRITE
+  int 80h
+  pop edx
+  pop ecx
+  pop ebx
+  pop eax
+  ret
+; End _start
