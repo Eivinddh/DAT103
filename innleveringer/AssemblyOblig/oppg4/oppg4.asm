@@ -31,36 +31,28 @@ _start:
   jmp MyLoop
   
 MyLoop:
-  push edx
-  push ecx
   cmp ecx,10
-  ja Sub ;conditioned/unconditioned?
   jl Add
+  ; minske
+  DEC edx
+  pop edx
+  jmp RestLoop
+
   
 Add:
-  push edx
   INC edx
   pop edx
   jmp RestLoop
   
 Sub:
-  push edx
-  DEC edx
-  pop edx
-  jmp RestLoop
- 
+   
 RestLoop:
-  push edx
-  push ecx
   inc ecx
   cmp ecx,20
   je Slutt
   jmp MyLoop 
 
 Slutt:
-  push edx
-  push ebx
-  push eax
   add edx,'0'
   mov [siffer],ecx
   mov ecx,siffer
@@ -73,10 +65,6 @@ Slutt:
   int 80h
   
 nylinje:
-  push eax
-  push ebx
-  push ecx
-  push edx
   mov edx,crlflen
   mov ecx,crlf
   mov ebx,STDOUT
