@@ -33,7 +33,6 @@ _start:
 MyLoop:
   cmp ecx,10
   jl Add
-<<<<<<< HEAD
 
   Sub:
     dec edx
@@ -59,27 +58,16 @@ nylinje:
   ret
 
 Slutt:
+  mov eax, SYS_WRITE
+  mov ebx, STDOUT
   add edx,'0'
   mov [siffer], edx
   mov ecx,siffer
-  mov edx,1
-  
+   
   int 80h
   call nylinje
   mov eax,SYS_EXIT
   mov ebx,0
   int 80h
-  
-nylinje:
-  mov edx,crlflen
-  mov ecx,crlf
-  mov ebx,STDOUT
-  mov eax,SYS_WRITE
-  int 80h
-  pop edx
-  pop ecx
-  pop ebx
-  pop eax
-  ret
 
 ; End _start
